@@ -1,7 +1,7 @@
-import {  gql } from '@apollo/client';
+import { gql } from '@apollo/client';
 
 export const GET_USER = gql`
-query ExampleQuery {
+query Query {
     company {
       ceo
     }
@@ -10,4 +10,15 @@ query ExampleQuery {
     }
   }
   `
+
+export const GET_LAUNCHES = gql`
+query Query($limit: Int, $offset: Int) {
+    launches(limit: $limit, offset: $offset) {
+      id
+      details
+      launch_date_local
+    }
+  }
+  
+`;
 
