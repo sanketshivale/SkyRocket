@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
-import Image from '../../assets/landing1.jpg';
 import useInfiniteScroll from '../../customHooks/useInfiniteScroll';
 import SkeletonLoader from '../../components/SkeletonLoader';
-import { GET_LAUNCHES } from '../../graphql/query/getQuery';
+import { GET_LANDPADS } from '../../graphql/query/getQuery';
 
-const Capsules = () => {
-    const { loading, error, data, fetchMore } = useQuery(GET_LAUNCHES, {
+const Landpads = () => {
+    const { loading, error, data, fetchMore } = useQuery(GET_LANDPADS, {
         variables: { limit: 12, offset: 0 },
     });
 
@@ -14,16 +13,16 @@ const Capsules = () => {
         if (data) {
             await fetchMore({
                 variables: {
-                    offset: data.launches.length,
+                    offset: data.landpads.length,
                 },
                 updateQuery: (prev, { fetchMoreResult }) => {
-                    if (!fetchMoreResult || fetchMoreResult.launches.length === 0) {
+                    if (!fetchMoreResult || fetchMoreResult.landpads.length === 0) {
                         setHasMore(false);
                         return prev;
                     }
                     return {
                         ...prev,
-                        launches: [...prev.launches, ...fetchMoreResult.launches],
+                        landpads: [...prev.landpads, ...fetchMoreResult.landpads],
                     };
                 },
             });
@@ -40,7 +39,7 @@ const Capsules = () => {
     });
 
     if (loading && !data && !isFetchingMore) {
-        return <SkeletonLoader />
+        return <div className='pt-16 mx-4'><SkeletonLoader /></div>
     }
 
     if (error) {
@@ -48,20 +47,20 @@ const Capsules = () => {
     }
 
     return (
-        <div className="bg-black min-h-screen text-white">
-            <div className="container mx-auto py-8 mt-16">
-                <h1 className="text-4xl font-bold text-center mb-8">Welcome to the SpaceX Data API Home Page</h1>
+        <div className="bg-black min-h-screen text-white pt-16">
+            <div className="mx-4 py-8">
+                <h1 className="text-4xl font-bold text-center mb-8 py-8">Landpads</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    {data.launches.map((launch, index) => (
-                        <div key={launch.id} className="flex flex-col">
-                            <div className="bg-gray-800 rounded-lg overflow-hidden shadow-md">
-                                <img src={Image} alt="SpaceX" className="w-full h-56 object-cover" />
-                                <div className="p-4">
-                                    <h2 className="text-xl font-bold mb-2">{launch.launch_date_local}</h2>
-                                    <p className="text-gray-300">{launch.details}</p>
+                    {data.landpads.map((landpad, index) => (
+                        <div key={landpad.id} className="flex flex-col">
+                            <div className="bg-white text-black rounded-lg overflow-hidden shadow-md flex flex-col h-full">
+                                <h1 className="text-xl font-bold mb-2 p-4">{landpad.full_name} </h1>
+                                <div className="p-4 flex-grow">
+                                    <p className="text-gray-800">Status: {landpad.status}</p>
+                                    <p className="text-gray-800">WIKI: <a className='text-blue-800' target='_blank' rel='noopener noreferrer' href={landpad.wikipedia}>{landpad.wikipedia}</a></p>
                                 </div>
                             </div>
-                            {data.launches.length === index + 1 && hasMore && (
+                            {data.landpads.length === index + 1 && hasMore && (
                                 <div ref={lastElementRef}></div>
                             )}
                         </div>
@@ -72,8 +71,8 @@ const Capsules = () => {
                         </div>
                     )}
                     {!hasMore && (
-                        <div className="col-span-1 md:col-span-2 lg:col-span-3 text-center">
-                            <p>No more launches to display.</p>
+                        <div className="col-span-1 md:col-span-2 lg:col-span-4 text-center">
+                            <p>No more landpads to display.</p>
                         </div>
                     )}
                 </div>
@@ -82,4 +81,4 @@ const Capsules = () => {
     );
 };
 
-export default Capsules;
+export default Landpads;
