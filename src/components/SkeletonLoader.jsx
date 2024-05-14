@@ -5,7 +5,7 @@ import { RingLoader } from 'react-spinners';
 
 const SkeletonLoader = () => {
     return (
-        <div className="">
+        <>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 opacity-50 mt-4">
                 {Array.from({ length: 8 }).map((_, index) => (
@@ -23,7 +23,7 @@ const SkeletonLoader = () => {
             <div className="flex justify-center items-center w-full">
                 <RingLoader color={"#ffffff"} loading={true} size={100} />
             </div>
-        </div>
+        </>
     );
 };
 

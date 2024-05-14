@@ -1,12 +1,14 @@
 import React from 'react';
 
-export default function Button({ data , color, onClick }) {
+function Button({ data , onClick }) {
     return (
         <button
             onClick={onClick}
-            className={`bg-${color}-500 hover:bg-${color}-700 text-white font-bold py-2 px-4 rounded`}
+            className={`bg-slate-50 hover:bg-gray-900 text-black hover:text-white font-bold py-2 px-4 sm:py-3 sm:px-6 rounded`}
         >
             {data}
         </button>
     );
 }
+
+export default Button;
