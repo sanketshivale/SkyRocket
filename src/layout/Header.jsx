@@ -20,7 +20,7 @@ const Header = () => {
     return (
         <nav className="bg-white text-black p-4 shadow-lg mx-4 z-20 rounded-lg fixed top-0 left-0 right-0">
             <div className="container mx-auto flex justify-between items-center">
-                <h1 className="lg:text-3xl md:text-2xl font-semibold flex items-center">
+                <h1 className="lg:text-2xl md:text-2xl font-semibold flex items-center">
                     <MdRocket className="inline-block mr-2" />
                     <Link to="/" className="hover:text-gray-700 transition duration-300">SpaceX Data API</Link>
                 </h1>

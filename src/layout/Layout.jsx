@@ -5,7 +5,7 @@ import Header from './Header';
 
 const Layout = () => {
     return (
-        <main className='text-white flex flex-wrap bg-black '>
+        <main className='text-white bg-black '>
             <Header />
             <Outlet />
             <Footer />
