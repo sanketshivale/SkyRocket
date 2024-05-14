@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { RiMenuLine } from 'react-icons/ri';
+import { Link } from 'react-router-dom'; // If you're using React Router
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,9 +11,11 @@ const Header = () => {
     };
 
     return (
-        <nav className="bg-white text-black py-4">
+        <nav className="bg-white text-black p-4 shadow-md">
             <div className="container mx-auto flex justify-between items-center">
-                <h1 className="text-3xl font-semibold">SpaceX Data API</h1>
+                <h1 className="text-3xl font-semibold">
+                    <Link to="/">SpaceX Data API</Link>
+                </h1>
                 <div className="lg:hidden">
                     {/* Toggle button */}
                     <button
@@ -23,10 +26,10 @@ const Header = () => {
                     </button>
                 </div>
                 {/* Menu items */}
-                <ul className={`lg:flex lg:space-x-4 ${isMenuOpen ? 'block' : 'hidden'}`}>
-                    <li><a href="#" className="text-lg  hover:underline">Home</a></li>
-                    <li><a href="#" className="text-lg hover:underline">About</a></li>
-                    <li><a href="#" className="text-lg hover:underline">Contact</a></li>
+                <ul className={`lg:flex lg:space-x-4 lg:items-center lg:transition-all lg:duration-300 ${isMenuOpen ? 'block' : 'hidden'}`}>
+                    <li><Link to="/" className="text-lg hover:text-gray-700 transition duration-300">Home</Link></li>
+                    <li><Link to="/about" className="text-lg hover:text-gray-700 transition duration-300">About</Link></li>
+                    <li><Link to="/contact" className="text-lg hover:text-gray-700 transition duration-300">Contact</Link></li>
                 </ul>
             </div>
         </nav>

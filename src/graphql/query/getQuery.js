@@ -22,3 +22,12 @@ query Query($limit: Int, $offset: Int) {
   
 `;
 
+export const GET_LAUNCH = gql`
+query Query($id: ID!) {
+    launch(id: $id) {
+      id
+      details
+      launch_date_local
+    }
+  }
+  `;
