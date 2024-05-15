@@ -4,6 +4,7 @@ import Image from '../../assets/landing1.jpg';
 import useInfiniteScroll from '../../customHooks/useInfiniteScroll';
 import SkeletonLoader from '../../components/SkeletonLoader';
 import { GET_SHIPS } from '../../graphql/query/getQuery';
+import { Link } from 'react-router-dom';
 
 const Ships = () => {
     const { loading, error, data, fetchMore } = useQuery(GET_SHIPS, {
@@ -53,8 +54,8 @@ const Ships = () => {
                 <h1 className="text-4xl font-bold text-center mb-8 py-8">Ships</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     {data.ships.map((ship, index) => (
-                        <div key={ship.id} className="flex flex-col">
-                            <div className="bg-white text-black rounded-lg overflow-hidden shadow-md flex flex-col h-full">
+                        <Link to={`/ships/${ship.id}`} className='flex flex-col' key={ship.id}>
+                            <div className="bg-white text-black hover:text-cyan-800 rounded-lg overflow-hidden shadow-md flex flex-col h-full">
                                 <img src={ship.image} loading='lazy' alt={ship.name} className="w-full h-56 object-cover bg-gray-500" />
                                 <div className="p-4 flex-grow">
                                     <h2 className="text-xl font-bold mb-2">{ship.name}</h2>
@@ -65,7 +66,7 @@ const Ships = () => {
                             {data.ships.length === index + 1 && hasMore && (
                                 <div ref={lastElementRef}></div>
                             )}
-                        </div>
+                        </Link>
                     ))}
                     {isFetchingMore && hasMore && (
                         <div className="col-span-1 md:col-span-2 lg:col-span-4">

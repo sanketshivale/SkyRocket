@@ -52,6 +52,25 @@ query Query($limit: Int, $offset: Int) {
   }
 }`;
 
+export const GET_CORE_BY_ID = gql`
+query Query($coreId: ID!) {
+  core(id: $coreId) {
+    asds_attempts
+    asds_landings
+    block
+    id
+    original_launch
+    reuse_count
+    rtls_attempts
+    rtls_landings
+    status
+    water_landing
+    missions {
+      name
+    }
+  }
+}`;
+
 // Dragons
 export const GET_DRAGONS = gql`
 query Query($limit: Int, $offset: Int) {
@@ -67,6 +86,81 @@ query Query($limit: Int, $offset: Int) {
   }
 }`;
 
+export const GET_DRAGON_BY_ID = gql`
+query Query($dragonId: ID!) {
+  dragon(id: $dragonId) {
+    active
+    crew_capacity
+    description
+    dry_mass_kg
+    dry_mass_lb
+    first_flight
+    id
+    name
+    orbit_duration_yr
+    sidewall_angle_deg
+    type
+    wikipedia
+    diameter {
+      feet
+      meters
+    }
+    heat_shield {
+      dev_partner
+      material
+      size_meters
+      temp_degrees
+    }
+    height_w_trunk {
+      feet
+      meters
+    }
+    launch_payload_mass {
+      kg
+      lb
+    }
+    launch_payload_vol {
+      cubic_feet
+      cubic_meters
+    }
+    pressurized_capsule {
+      payload_volume {
+        cubic_feet
+        cubic_meters
+      }
+    }
+    return_payload_mass {
+      kg
+      lb
+    }
+    return_payload_vol {
+      cubic_feet
+      cubic_meters
+    }
+    thrusters {
+      amount
+      fuel_1
+      fuel_2
+      pods
+      thrust {
+        kN
+        lbf
+      }
+      type
+    }
+    trunk {
+      cargo {
+        solar_array
+        unpressurized_cargo
+      }
+      trunk_volume {
+        cubic_feet
+        cubic_meters
+      }
+    }
+  }
+}`;
+
 // Ships
 export const GET_SHIPS = gql`
 query Query($limit: Int, $offset: Int) {
@@ -78,6 +172,26 @@ query Query($limit: Int, $offset: Int) {
     year_built
   }
 }`;
+
+export const GET_SHIP_BY_ID = gql`
+  query Query($shipId: ID!) {
+    ship(id: $shipId) {
+      abs
+      active
+      attempted_landings
+      class
+      course_deg
+      home_port
+      id
+      image
+      imo
+      mmsi
+      roles
+      status
+      year_built
+    }
+  }
+`;
 
 // Rockets
 export const GET_ROCKETS = gql`
@@ -148,6 +262,24 @@ query Query($limit: Int, $offset: Int) {
   }
 }`;
 
+export const GET_HISTORY_BY_ID = gql`
+query Query($historyId: ID!) {
+
+  history(id: $historyId) {
+    details
+    event_date_unix
+    event_date_utc
+    id
+    title
+    links {
+      article
+      reddit
+      wikipedia
+    }
+    
+  }
+}
+`;
 
 // Landpads
 export const GET_LANDPADS = gql`
@@ -171,5 +303,24 @@ query Query($limit: Int, $offset: Int) {
     type
   }
 }`;
+
+export const GET_CAPSULES_BY_ID = gql`
+query Query($capsuleId: ID!) {
+  capsule(id: $capsuleId) {
+    id
+    landings
+    original_launch
+    reuse_count
+    status
+    type
+    dragon {
+      id
+    }
+    missions {
+      name
+    }
+  }
+}
+`;
 
 
